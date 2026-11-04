@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+html, body, #root { min-height: 100%; }
+
+body {
+  @apply bg-ink font-sans text-zinc-100 antialiased;
+  background-image:
+    radial-gradient(900px 480px at 85% -8%, rgba(34, 197, 94, 0.10), transparent 60%),
+    radial-gradient(700px 420px at -10% 8%, rgba(34, 197, 94, 0.05), transparent 60%);
+  background-attachment: fixed;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-white/[0.06] bg-ink-700/80 p-4;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.035) inset, 0 12px 32px -18px rgba(0, 0, 0, 0.8);
+  }
+  .card-flat { @apply rounded-xl border border-white/[0.06] bg-ink-800/70 p-3; }
+
+  .btn {
+    @apply inline-flex min-h-[44px] select-none items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition
+      active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary { @apply bg-popa text-ink shadow-[0_6px_24px_-8px_rgba(34,197,94,0.7)] hover:bg-popa-glow; }
+  .btn-soft { @apply border border-white/10 bg-ink-600 text-zinc-100 hover:bg-ink-500; }
+  .btn-ghost { @apply text-zinc-300 hover:bg-white/5; }
+  .btn-danger { @apply border border-red-500/30 bg-red-500/10 text-red-300 hover:bg-red-500/20; }
+  .btn-sm { @apply min-h-[36px] rounded-lg px-3 text-xs; }
+
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-ink-900 px-3 py-2.5 text-base text-zinc-100 outline-none transition
+      placeholder:text-zinc-600 focus:border-popa/70 focus:ring-2 focus:ring-popa/20;
+  }
+  .label { @apply mb-1.5 block text-xs font-medium text-mute; }
+  .eyebrow { @apply text-[10px] font-bold uppercase tracking-[0.22em] text-popa; }
+  .num { @apply font-display tabular-nums tracking-tight; }
+}
+
+/* Scrollbar discreta */
+* { scrollbar-width: thin; scrollbar-color: #2a312c transparent; }
+
+/* Gráficos Recharts: sem contorno azul ao focar */
+.recharts-wrapper, .recharts-surface { outline: none !important; }
+
+/* Remove setas dos inputs numéricos */
+input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type='number'] { -moz-appearance: textfield; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
